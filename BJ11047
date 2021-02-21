@@ -1,0 +1,27 @@
+n,k = map(int,input().split()) #한줄로 입력받기
+coins = [] #코인미리 선언 왜?여러줄로 입력받을때 쓰려고
+count = 0 #그냥 초기화 찝찝해서
+for _ in range(n):
+  s = int(input())
+  coins.append(s) #한줄에 한번에 입력은 받겠는데 엔터치면서 하나씩 입력받는 거 못해서 리스트로 추가해버림
+if n==1:
+  count = k #갯수가 하나일 때 안되더라고 이런식으로 좀 조건에서 최극단의 경우를 해봐야될 듯
+else:
+  print(coins)
+  for i in range(n-1,-1,-1): #여기서 range(n-1,0,-1)로 해서 1로 나눈 몫이 안뜨더라 [0]으로 안갔음
+    print(k)
+    if coins[i]>k and coins[i-1]<=k:
+      print(coins[i-1],"i") #indented 오류 많이 났는데 tab 안해서 그런거임 파이썬은 들여쓰기로 구분이라
+      count += k // coins[i-1]
+      k %= coins[i-1]
+      print(k,"k")
+      print(count,"count") #이거는 그냥 일반적인 경우라 알고리즘짜는건 할만했음
+    if coins[i] <= k: 
+      print(coins[i],"i")
+      count += k // coins[i]
+      k %= coins[i]  #k보다 작을때는 생각안했더라고 바로 위 조건문처럼 생각나는 거 일단 갈겨서 쓰고 
+      print(k,"k")   #이런건 위 조건문의 범위의 여집합을 생각해봐야될듯
+      print(count,"count") #이런건 코딩되는 과정보려고 중간중간 출력 걸어둠. 디버깅모드에 아직 안익숙해서..
+    if k == 0:
+      break  #break랑 continue 차이는 아예 끝내느냐 그거는 건너띄고 담꺼랑 넘어가서 지속되냐의 차인듯
+print(count)
